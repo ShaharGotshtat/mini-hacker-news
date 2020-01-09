@@ -33,6 +33,11 @@ def get_all_posts():
     return jsonify(result)
 
 
+@app.route('/mini-hacker-news/api/v1/post/top', methods=['GET'])
+def get_top_posts():
+    return jsonify(top_posts.get_top_posts())
+
+
 @app.route('/mini-hacker-news/api/v1/post', methods=['PUT'])
 def update_post():
     if not request.json or not 'text' in request.json or not 'id' in request.json:
@@ -55,11 +60,6 @@ def upvote_post():
 def downvote_post():
     post_id = request.json['id']
     return utils.update_votes('downvotes', post_id)
-
-
-@app.route('/mini-hacker-news/api/v1/top-post', methods=['GET'])
-def get_top_posts():
-    return jsonify(top_posts.get_top_posts())
 
 
 if __name__ == '__main__':
