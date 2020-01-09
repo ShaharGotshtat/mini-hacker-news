@@ -38,8 +38,8 @@ def update_post():
     if not request.json or not 'text' in request.json or not 'id' in request.json:
         utils.invalid_request()
 
-    post_id = request.json["id"]
-    text = request.json["text"]
+    post_id = request.json['id']
+    text = request.json['text']
     result = execute_update_query(f'UPDATE `post` SET text = "{text}" WHERE id = {post_id};')
 
     return utils.validate_update(result, post_id)
@@ -47,13 +47,13 @@ def update_post():
 
 @app.route('/mini-hacker-news/api/v1/post/upvote', methods=['PUT'])
 def upvote_post():
-    post_id = request.json["id"]
+    post_id = request.json['id']
     return utils.update_votes('upvotes', post_id)
 
 
 @app.route('/mini-hacker-news/api/v1/post/downvote', methods=['PUT'])
 def downvote_post():
-    post_id = request.json["id"]
+    post_id = request.json['id']
     return utils.update_votes('downvotes', post_id)
 
 
