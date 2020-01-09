@@ -1,2 +1,3 @@
 Flask
 mysql-connector
+APScheduler==3.6.0

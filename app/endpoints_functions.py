@@ -2,6 +2,9 @@ from flask import abort
 from flask import jsonify
 
 from db_connector import execute_update_query
+from apscheduler.schedulers.background import BackgroundScheduler
+
+import top_posts
 
 
 def invalid_request():
@@ -22,3 +25,9 @@ def update_votes(votes_kind, post_id):
     result = execute_update_query(f'UPDATE `post` SET {votes_kind} = {votes_kind} + 1 WHERE id = {post_id};')
 
     return validate_update(result, post_id)
+
+
+def schedule_top_posts_updates(seconds_between_top_posts_updates):
+    scheduler = BackgroundScheduler()
+    scheduler.add_job(top_posts.update_top_posts, 'interval', seconds=seconds_between_top_posts_updates)
+    scheduler.start()

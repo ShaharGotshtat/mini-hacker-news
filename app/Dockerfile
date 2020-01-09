@@ -11,4 +11,5 @@ RUN pip install -r requirements.txt
 COPY app.py /app
 COPY db_connector.py /app
 COPY endpoints_functions.py /app
+COPY top_posts.py /app
 CMD python app.py

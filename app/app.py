@@ -1,8 +1,11 @@
 from flask import Flask
 from flask import request
 from flask import jsonify
+
 from db_connector import execute_create_query, execute_get_query, execute_update_query
+
 import endpoints_functions
+import top_posts
 
 
 app = Flask(__name__)
@@ -54,5 +57,12 @@ def downvote_post():
     return endpoints_functions.update_votes('downvotes', post_id)
 
 
+@app.route('/mini-hacker-news/api/v1/top-post', methods=['GET'])
+def get_top_posts():
+    return jsonify(top_posts.get_top_posts())
+
+
 if __name__ == '__main__':
+    endpoints_functions.schedule_top_posts_updates(60)
+
     app.run(host='0.0.0.0', debug=True)
