@@ -1,4 +1,4 @@
-# mini-hacker-news
+# Mini Hacker News
 
 This is a Dockerized Flask and MySQL RESTful API application.
 
@@ -16,52 +16,90 @@ You can use Postman or any similar application.
 
 ### API:
 Add post:
+
 Method: POST
+
 URL: ```http://0.0.0.0:5000/mini-hacker-news/api/v1/post```
+
 Headers: ```Content-Type = application/json```
 Body:
-```{
+```
+{
 "text": "The content of your post"
-}```
+}
+```
+
 
 Get post:
+
 Method: GET
+
 URL: ```http://0.0.0.0:5000/mini-hacker-news/api/v1/post/{id}```
+
 Headers: ```Content-Type = application/json```
+
 
 Get all posts:
+
 Method: GET
+
 URL: ```http://0.0.0.0:5000/mini-hacker-news/api/v1/post/all```
+
 Headers: ```Content-Type = application/json```
+
 
 Get top post:
+
 Method: GET
+
 URL: ```http://0.0.0.0:5000/mini-hacker-news/api/v1/post/top```
+
 Headers: ```Content-Type = application/json```
+
 
 Update post:
+
 Method: PUT
+
 URL: ```http://0.0.0.0:5000/mini-hacker-news/api/v1/post```
+
 Headers: ```Content-Type = application/json```
+
 Body:
-```{
+```
+{
 "text": "The new content of your post"
-}```
+}
+```
+
 
 Upvote post:
+
 Method: PUT
+
 URL: ```http://0.0.0.0:5000/mini-hacker-news/api/v1/post/upvote```
+
 Headers: ```Content-Type = application/json```
+
 Body:
-```{
+```
+{
 "id": <The ID of the post>
-}```
+}
+```
+
 
 Downvote post:
+
 Method: PUT
+
 URL: ```http://0.0.0.0:5000/mini-hacker-news/api/v1/post/downvote```
+
 Headers: ```Content-Type = application/json```
+
 Body:
-```{
+```
+{
 "id": <The ID of the post>
-}```
+}
+```
