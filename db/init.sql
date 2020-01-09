@@ -1,0 +1,10 @@
+CREATE DATABASE IF NOT EXISTS `mini-hacker-news`;
+use mini-hacker-news;
+
+CREATE TABLE IF NOT EXISTS post (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  text TEXT NOT NULL,
+  upvotes INT DEFAULT 0,
+  downvotes INT DEFAULT 0
+);
