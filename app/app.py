@@ -4,7 +4,7 @@ from flask import jsonify
 
 from db_connector import execute_create_query, execute_get_query, execute_update_query
 
-import endpoints_functions
+import utils
 import top_posts
 
 
@@ -14,7 +14,7 @@ app = Flask(__name__)
 @app.route('/mini-hacker-news/api/v1/post', methods=['POST'])
 def add_post():
     if not (request.json and 'text' in request.json):
-        endpoints_functions.invalid_request()
+        utils.invalid_request()
 
     text = request.json["text"]
     result = execute_create_query(f'INSERT INTO `post`(text) VALUES ("{text}");')
@@ -36,25 +36,25 @@ def get_all_posts():
 @app.route('/mini-hacker-news/api/v1/post', methods=['PUT'])
 def update_post():
     if not request.json or not 'text' in request.json or not 'id' in request.json:
-        endpoints_functions.invalid_request()
+        utils.invalid_request()
 
     post_id = request.json["id"]
     text = request.json["text"]
     result = execute_update_query(f'UPDATE `post` SET text = "{text}" WHERE id = {post_id};')
 
-    return endpoints_functions.validate_update(result, post_id)
+    return utils.validate_update(result, post_id)
 
 
 @app.route('/mini-hacker-news/api/v1/post/upvote', methods=['PUT'])
 def upvote_post():
     post_id = request.json["id"]
-    return endpoints_functions.update_votes('upvotes', post_id)
+    return utils.update_votes('upvotes', post_id)
 
 
 @app.route('/mini-hacker-news/api/v1/post/downvote', methods=['PUT'])
 def downvote_post():
     post_id = request.json["id"]
-    return endpoints_functions.update_votes('downvotes', post_id)
+    return utils.update_votes('downvotes', post_id)
 
 
 @app.route('/mini-hacker-news/api/v1/top-post', methods=['GET'])
@@ -63,6 +63,6 @@ def get_top_posts():
 
 
 if __name__ == '__main__':
-    endpoints_functions.schedule_top_posts_updates(60)
+    utils.schedule_top_posts_updates(60)
 
     app.run(host='0.0.0.0', debug=True)
