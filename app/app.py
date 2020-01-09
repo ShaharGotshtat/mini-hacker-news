@@ -19,5 +19,17 @@ def add_post():
     return jsonify(results)
 
 
+@app.route('/mini-hacker-news/api/v1/post/<id>', methods=['GET'])
+def get_post(id):
+    results = execute_get_query(f'SELECT * FROM post WHERE id = {id}')
+    return jsonify(results)
+
+
+@app.route('/mini-hacker-news/api/v1/post/all', methods=['GET'])
+def get_all_posts():
+    results = execute_get_query('SELECT * FROM post')
+    return jsonify(results)
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', debug=True)
