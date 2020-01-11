@@ -105,4 +105,4 @@ Body:
 ```
 
 ### Test:
-After running ```docker-compose up```, while the application is running, run the integration-test.py from your IDE. 
+After running ```docker-compose up```, while the application is running, run integration-test/integration-test.py from your IDE or terminal. 
