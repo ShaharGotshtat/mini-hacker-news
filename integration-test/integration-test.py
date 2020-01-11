@@ -1,5 +1,14 @@
 import requests
 
+########################################################################################
+# In a real production environment, this test is insufficient.                         #
+# I would recommend:                                                                   #
+# 1. Creating a new test DB.                                                           #
+# 2. Insert posts examples with different creation dates, upvotes and downvotes.       #
+# 3. Test the top posts endpoint.                                                      #
+# 4. Delete the test DB.                                                               #
+########################################################################################
+
 
 class Test:
     URL_BASE = 'http://0.0.0.0:5000/mini-hacker-news/api/v1'
