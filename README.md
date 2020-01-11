@@ -103,3 +103,6 @@ Body:
 "id": <The ID of the post>
 }
 ```
+
+### Test:
+After running ```docker-compose up```, while the application is running, run the integration-test.py from your IDE. 
