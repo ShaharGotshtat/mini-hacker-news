@@ -11,7 +11,7 @@ def invalid_request():
     abort(400, {'message': 'Invalid request parameters'})
 
 
-def validate_update(result, post_id):
+def validate_query_result(result, post_id):
     if result <= 0:
         abort(500, {'message': f'Could not update post with ID {post_id}'})
 
@@ -24,7 +24,7 @@ def update_votes(votes_kind, post_id):
 
     result = execute_update_query(f'UPDATE `post` SET {votes_kind} = {votes_kind} + 1 WHERE id = {post_id};')
 
-    return validate_update(result, post_id)
+    return validate_query_result(result, post_id)
 
 
 def schedule_top_posts_updates(seconds_between_top_posts_updates):

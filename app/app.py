@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask import jsonify
 
-from db_connector import execute_create_query, execute_get_query, execute_update_query
+from db_connector import execute_create_query, execute_get_query, execute_update_query, execute_delete_query
 
 import utils
 import top_posts
@@ -21,9 +21,9 @@ def add_post():
     return jsonify(result)
 
 
-@app.route('/mini-hacker-news/api/v1/post/<id>', methods=['GET'])
-def get_post(id):
-    result = execute_get_query(f'SELECT * FROM post WHERE id = {id}')
+@app.route('/mini-hacker-news/api/v1/post/<post_id>', methods=['GET'])
+def get_post(post_id):
+    result = execute_get_query(f'SELECT * FROM post WHERE id = {post_id}')
     return jsonify(result)
 
 
@@ -47,7 +47,7 @@ def update_post():
     text = request.json['text']
     result = execute_update_query(f'UPDATE `post` SET text = "{text}" WHERE id = {post_id};')
 
-    return utils.validate_update(result, post_id)
+    return utils.validate_query_result(result, post_id)
 
 
 @app.route('/mini-hacker-news/api/v1/post/upvote', methods=['PUT'])
@@ -60,6 +60,12 @@ def upvote_post():
 def downvote_post():
     post_id = request.json['id']
     return utils.update_votes('downvotes', post_id)
+
+
+@app.route('/mini-hacker-news/api/v1/post/<post_id>', methods=['DELETE'])
+def delete_post(post_id):
+    result = execute_delete_query(f'DELETE FROM post WHERE id = {post_id}')
+    return utils.validate_query_result(result, post_id)
 
 
 if __name__ == '__main__':
