@@ -1,7 +1,9 @@
 version: "2"
 services:
   app:
-    build: ./app
+    build:
+      context: ./
+      dockerfile: ./app/Dockerfile
     links:
       - db
     ports:

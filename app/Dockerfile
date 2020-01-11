@@ -5,11 +5,11 @@ EXPOSE 5000
 
 WORKDIR /app
 
-COPY requirements.txt /app
+COPY ./app/requirements.txt /app
 RUN pip install -r requirements.txt
 
-COPY app.py /app
-COPY db_connector.py /app
-COPY utils.py /app
-COPY top_posts.py /app
+COPY ./app/app.py /app
+COPY ./db/db_connector.py /app
+COPY ./app/utils.py /app
+COPY ./app/top_posts.py /app
 CMD python app.py
