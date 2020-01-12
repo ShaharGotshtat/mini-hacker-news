@@ -1,6 +1,5 @@
 from flask import Flask
 from flask import request
-from flask import jsonify
 
 from db_connector import execute_create_query, execute_get_query, execute_update_query, execute_delete_query
 
@@ -18,24 +17,24 @@ def add_post():
 
     text = request.json["text"]
     result = execute_create_query(f'INSERT INTO `post`(text) VALUES ("{text}");')
-    return jsonify(result)
+    return utils.get_response(result)
 
 
 @app.route('/mini-hacker-news/api/v1/post/<post_id>', methods=['GET'])
 def get_post(post_id):
     result = execute_get_query(f'SELECT * FROM post WHERE id = {post_id}')
-    return jsonify(result)
+    return utils.get_response(result)
 
 
 @app.route('/mini-hacker-news/api/v1/post/all', methods=['GET'])
 def get_all_posts():
     result = execute_get_query('SELECT * FROM post')
-    return jsonify(result)
+    return utils.get_response(result)
 
 
 @app.route('/mini-hacker-news/api/v1/post/top', methods=['GET'])
 def get_top_posts():
-    return jsonify(top_posts.get_top_posts())
+    return utils.get_response(top_posts.get_top_posts())
 
 
 @app.route('/mini-hacker-news/api/v1/post', methods=['PUT'])

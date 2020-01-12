@@ -30,7 +30,7 @@ def get_results(cursor, results_method):
 
 def execute_query(query, results_method):
     connection = get_db_connection()
-    cursor = connection.cursor(buffered=True)
+    cursor = connection.cursor(buffered=True, dictionary=True)
     cursor.execute(query)
     connection.commit()
     results = get_results(cursor, results_method)
